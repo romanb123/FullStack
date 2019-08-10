@@ -1,13 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import News from './news';
+import SingleNews from './singlenew';
+import SingleSports from './singlsport';
 
 function Home() {
     return <h2>Home</h2>;
 }
-
-
-
 function Sport() {
     return <h2>sport</h2>;
 }
@@ -31,8 +30,10 @@ function AppRouter() {
                 </nav>
 
                 <Route path="/" exact component={Home} />
-                <Route path="/news" component={News} />
-                <Route path="/sports" component={Sport} />
+                <Route path ="/news" exact component={News} />
+                <Route path="/sports" exact component={Sport} />
+                <Route path ="/news/:id" component={SingleNews} />
+                <Route path ="/sports/:id" component={SingleSports} />
             </div>
         </Router>
     );
