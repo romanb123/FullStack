@@ -7,20 +7,24 @@ class Singlesports extends Component {
       this.state = {
         error: null,
         isLoaded: false,
-    news:[]
+    news:[],
+    comments:[]
       };
     }
   
     componentDidMount() {
-        axios.get("http://localhost:3000/sports/"+this.props.match.params.id)
-        .then(res => {
-            const newsdata = res.data;
+        axios.all([
+             axios.get("http://localhost:3000/sports/"+this.props.match.params.id),
+             axios.get("http://localhost:3000/sports/comments/"+this.props.match.params.id),
+          ]).then(res => {
+            const newsdata = res;
             console.log(this.props.match.params.id);
-            console.log(newsdata[0]);
+            console.log(newsdata);
 
             this.setState({news:newsdata[0]});
         })
     }
+  
   
     render() {
         

@@ -32,6 +32,8 @@ class News extends Component {
                 <h5 className="card-title">{onenew.title}</h5>
                <p className="card-text">{onenew.body}</p>
                <button><Link className="nav-link" to={`/news/${onenew.id}`}>read more</Link></button>
+              
+
         </div>
           </div>
             ))}

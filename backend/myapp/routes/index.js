@@ -52,12 +52,21 @@ router.get('/sport/:id', function (req, res, next) {
 //   // });
 //   res.send("gotit");
 // });
-router.post('/sports/comments/:id', function (req, res, next) {
+router.post('/comments/:id', function (req, res, next) {
   var comment = `INSERT INTO comments ( title, body, article_id) VALUES ('${req.body.title}', '${req.body.body}','${req.params.id}')`;
   sql.query(comment, function (err, result) {
     if (err) throw err;
     console.log("1 record inserted");
     res.send('news');
+  });
+});
+
+
+router.get('/comments/:id', function (req, res, next) {
+  sql.query(`SELECT * FROM comments WHERE article_id = '${req.params.id}'`, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    res.send(result);
   });
 });
 
