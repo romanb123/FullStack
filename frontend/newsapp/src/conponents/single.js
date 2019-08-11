@@ -14,7 +14,7 @@ class Singlenews extends Component {
   
     componentDidMount() {
         axios.all([
-            axios.get("http://localhost:3000/news/"+this.props.match.params.id),
+            axios.get("http://localhost:3000/article/"+this.props.match.params.id),
             axios.get("http://localhost:3000/comments/"+this.props.match.params.id)
           ]).then(res => {
             const articledata = res[0].data;

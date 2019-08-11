@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import News from './news';
-import SingleNews from './singlenew';
-import SingleSports from './singlsport';
+import Sport from './sport';
+
 
 function Home() {
     return <h2>Home</h2>;
