@@ -2,14 +2,11 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import News from './news';
 import Sport from './sport';
+import Single from './single';
+import Home from './home';
 
 
-function Home() {
-    return <h2>Home</h2>;
-}
-function Sport() {
-    return <h2>sport</h2>;
-}
+
 
 function AppRouter() {
     return (
@@ -32,8 +29,8 @@ function AppRouter() {
                 <Route path="/" exact component={Home} />
                 <Route path ="/news" exact component={News} />
                 <Route path="/sports" exact component={Sport} />
-                <Route path ="/news/:id" component={SingleNews} />
-                <Route path ="/sports/:id" component={SingleSports} />
+                <Route path ="/article/:id" component={Single} />
+               
             </div>
         </Router>
     );

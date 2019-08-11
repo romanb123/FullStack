@@ -12,7 +12,7 @@ class Sport extends Component {
     }
   
     componentDidMount() {
-        axios.get("http://localhost:3000/sports")
+        axios.get("http://localhost:3000/sport")
         .then(res => {
             const newsdata = res.data;
             console.log(res.data);
@@ -31,7 +31,7 @@ class Sport extends Component {
                  <h5 className="card-title">{onenew.id}</h5>
                 <h5 className="card-title">{onenew.title}</h5>
                <p className="card-text">{onenew.body}</p>
-               <button><Link className="nav-link" to={`/news/${onenew.id}`}>read more</Link></button>
+               <button><Link className="nav-link" to={`/article/${onenew.id}`}>read more</Link></button>
               
 
         </div>
