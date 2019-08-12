@@ -9,22 +9,32 @@ class Single extends Component {
       isLoaded: false,
       article: [],
       comments: [],
-      newcomment: {}
     };
   }
-  postcomment = (e) => {
+  setcomment = (e) => {
     console.log(e.target.value);
-    this.setState({ newcomment: e.target.value })
+    this.setState({ title: e.target.value })
+    console.log(this.state.title);
+    console.log(this.state.article);
   }
   sendcomment = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
-    axios
-      .post(`http://localhost:3000/comments/` + this.props.match.params.id, this.state.newcomment)
+    
+    axios.post(`http://localhost:3000/comments/` + this.props.match.params.id,{title:this.state.title})
       .then(res => {
         const data = res.data;
         console.log(data);
-      });
+      }).then(axios.all([
+        axios.get("http://localhost:3000/article/" + this.props.match.params.id),
+        axios.get("http://localhost:3000/comments/" + this.props.match.params.id)
+      ]).then(res => {
+        const articledata = res[0].data;
+        const commentsdata = res[1].data;
+        console.log(this.props.match.params.id);
+        console.log(commentsdata);
+  
+        this.setState({ article: articledata[0], comments: commentsdata });
+      }));
 
   }
   componentDidMount() {
@@ -84,7 +94,7 @@ class Single extends Component {
                   <form onSubmit={this.sendcomment}>
                     <label>
                       commentbody
-    <input type="text" name="title" onChange={this.postcomment} />
+    <input type="text" name="title" onChange={this.setcomment} />
                     </label>
                     <label>
                       commentbody

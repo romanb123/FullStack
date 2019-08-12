@@ -37,7 +37,7 @@ router.post('/comments/:id', function (req, res, next) {
   var comment = `INSERT INTO comments ( title, body, article_id) VALUES ('${req.body.title}', '${req.body.body}','${req.params.id}')`;
   sql.query(comment, function (err, result) {
     if (err) throw err;
-    console.log("1 record inserted");
+    console.log(req.body);
     res.send('news');
   });
 });
