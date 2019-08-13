@@ -26,7 +26,7 @@ class News extends Component {
         return (
            <div>
             {this.state.news.map(onenew => (
-                <div className="card" style={{width: "40rem",margin:"auto",textAlign:"center"}} key={onenew.id}>
+                <div className="card" style={{width: "40rem",margin:"auto",textAlign:"center",backgroundColor:"#7EB3FF",color:"white"}} key={onenew.id}>
                  <div className="card-body">
                  <h5 className="card-title">{"post-id:  "+onenew.id}</h5>
                 <h5 className="card-title">{"title:  "+onenew.title}</h5>

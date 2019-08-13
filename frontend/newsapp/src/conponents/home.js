@@ -9,8 +9,8 @@ function AppRouter() {
     return (
         <div>
         <div className="container-fluid" style={{textAlign:"center"}}>
-        <div className="jumbotron">
-          <h1>Bootstrap Tutorial</h1>      
+        <div className="jumbotron" style={{backgroundColor:"#7EB3FF",color:"white"}}>
+          <h1>articles</h1>      
           <p>  </p>
           <button><Link className="nav-link" to={`/news`}>news</Link></button>
           <button><Link className="nav-link" to={`/sports`}>sports</Link></button>
