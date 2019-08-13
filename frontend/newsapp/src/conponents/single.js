@@ -12,15 +12,20 @@ class Single extends Component {
     };
   }
   setcomment = (e) => {
-    console.log(e.target.value);
-    this.setState({ title: e.target.value })
-    console.log(this.state.title);
-    console.log(this.state.article);
+    console.log(e.target.name);
+    if(e.target.name==="title"){
+    this.setState({ title: e.target.value });
+    }
+    else if(e.target.name==="body"){
+      this.setState({ body: e.target.value });
+    }  
   }
   sendcomment = (e) => {
     e.preventDefault();
+    console.log("title    "+this.state.title);
+    console.log("body    "+this.state.body);
     
-    axios.post(`http://localhost:3000/comments/` + this.props.match.params.id,{title:this.state.title})
+    axios.post(`http://localhost:3000/comments/` + this.props.match.params.id,{title:this.state.title,body:this.state})
       .then(res => {
         const data = res.data;
         console.log(data);
@@ -54,15 +59,17 @@ class Single extends Component {
   render() {
     return (
       <div style={{ textAlign: "center" }}>
-        <div className="card" style={{ width: "40rem", margin: "auto", textAlign: "center" }}>
+        <div className="card" style={{ width: "40rem", margin: "auto", textAlign: "center",backgroundColor:"#51EAFF" }}>
           <div className="card-body">
-            <h5 className="card-title">{this.state.article.category}</h5>
-            <h5 className="card-title">{this.state.article.title}</h5>
-            <p className="card-text">{this.state.article.body}</p>
+            <h5 className="card-title">{"category:  "+this.state.article.category}</h5>
+            <h5 className="card-title">{"title:  "+this.state.article.title}</h5>
+            <p className="card-text">{"body:  "+this.state.article.body}</p>
+            <p className="card-text">{"id:  "+this.state.article.id}</p>
             <br></br> <br></br>
             {this.state.comments.map(onenew => (
-              <div key={onenew.id}>
+              <div key={onenew.id} style={{backgroundColor:"#1EC9E8",color:"white"}}>
                 <p>{"articleid:  " + onenew.article_id}</p>
+                <p>{"comment-title:  " + onenew.title}</p>
                 <p>{"commentbody:  " + onenew.body}</p>
                 <p>{"comment-date:  " + onenew.date}</p>
               </div>
@@ -71,12 +78,8 @@ class Single extends Component {
         </div>
 
         <div className="container">
-          <h2>Fading Modal</h2>
-          <p>Add the "fade" class to the modal container if you want the modal to fade in on open and fade out on close.</p>
-
-
           <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal">
-            Open modal
+           add comment
   </button>
 
           <div className="modal fade" id="myModal">
@@ -93,17 +96,14 @@ class Single extends Component {
                 <div className="modal-body">
                   <form onSubmit={this.sendcomment}>
                     <label>
-                      commentbody
+                      commentitle
     <input type="text" name="title" onChange={this.setcomment} />
                     </label>
                     <label>
                       commentbody
-    <input type="text" name="name" onChange={this.postcomment} />
+    <input type="text" name="body" onChange={this.setcomment} />
                     </label>
-                    <label>
-                      commentbody
-    <input type="text" name="name" onChange={this.postcomment} />
-                    </label>
+                    <br></br>
                     <input type="submit" value="Отправить" />
                   </form>
                 </div>

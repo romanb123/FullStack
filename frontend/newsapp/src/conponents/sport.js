@@ -26,11 +26,11 @@ class Sport extends Component {
         return (
            <div>
             {this.state.news.map(onenew => (
-                <div className="card" style={{width: "40rem",margin:"auto",textAlign:"center"}} key={onenew.id}>
+                <div className="card" style={{width: "40rem",margin:"auto",textAlign:"center",backgroundColor:"#7EB3FF",color:"white"}} key={onenew.id}>
                  <div className="card-body">
-                 <h5 className="card-title">{onenew.id}</h5>
-                <h5 className="card-title">{onenew.title}</h5>
-               <p className="card-text">{onenew.body}</p>
+                 <h5 className="card-title">{"id:  "+onenew.id}</h5>
+                <h5 className="card-title">{"title:  "+onenew.title}</h5>
+               <p className="card-text">{"body:  "+onenew.body}</p>
                <button><Link className="nav-link" to={`/article/${onenew.id}`}>read more</Link></button>
               
 
