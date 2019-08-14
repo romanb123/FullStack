@@ -10,7 +10,28 @@ class Single extends Component {
       article: [],
       comments: [],
     };
+  } 
+  
+deletecomment=(e)=>{
+console.log(e.target.id);
+axios.post(`http://localhost:3000/deletecomment`,{id:e.target.id})
+.then(res => {
+  const data = res.data;
+  console.log(data);
+}).then(axios.all([
+  axios.get("http://localhost:3000/article/" + this.props.match.params.id),
+  axios.get("http://localhost:3000/comments/" + this.props.match.params.id)
+]).then(res => {
+  const articledata = res[0].data;
+  const commentsdata = res[1].data;
+  console.log(this.props.match.params.id);
+  console.log(commentsdata);
+
+  this.setState({ article: articledata[0], comments: commentsdata });
+}));
   }
+
+  
   setcomment = (e) => {
     console.log(e.target.name);
     if(e.target.name==="title"){
@@ -20,12 +41,13 @@ class Single extends Component {
       this.setState({ body: e.target.value });
     }  
   }
+
   sendcomment = (e) => {
     e.preventDefault();
     console.log("title    "+this.state.title);
     console.log("body    "+this.state.body);
     
-    axios.post(`http://localhost:3000/comments/` + this.props.match.params.id,{title:this.state.title,body:this.state})
+    axios.post(`http://localhost:3000/comments/` + this.props.match.params.id,{title:this.state.title,body:this.state.body})
       .then(res => {
         const data = res.data;
         console.log(data);
@@ -72,6 +94,8 @@ class Single extends Component {
                 <p>{"comment-title:  " + onenew.title}</p>
                 <p>{"commentbody:  " + onenew.body}</p>
                 <p>{"comment-date:  " + onenew.date}</p>
+                <p>{"comment-id:  " + onenew.id}</p>
+                <button onClick={this.deletecomment} id={onenew.id}>delete</button>
               </div>
             ))}
           </div>

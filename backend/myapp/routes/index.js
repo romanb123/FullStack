@@ -42,6 +42,16 @@ router.post('/comments/:id', function (req, res, next) {
   });
 });
 
+router.post('/deletecomment', function (req, res, next) {
+  var commentdeleted = `DELETE FROM comments WHERE id = '${req.body.id}'`;
+  sql.query(commentdeleted, function (err, result) {
+    if (err) throw err;
+    console.log("Number of records deleted: " + result.affectedRows);
+  });
+  console.log(req.body)
+  res.send('news')
+});
+
 
 router.get('/comments/:id', function (req, res, next) {
   sql.query(`SELECT * FROM comments WHERE article_id = '${req.params.id}'`, function (err, result) {
