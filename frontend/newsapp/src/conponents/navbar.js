@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import News from './news';
-import Sport from './sport';
+import Football from './football';
+import Basketball from './basketball';
 import Single from './single';
 import Home from './home';
 
@@ -18,18 +18,18 @@ function AppRouter() {
                             <Link className="nav-link" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/sports">Sports</Link>
+                            <Link className="nav-link" to="/football">football</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/news">News</Link>
+                            <Link className="nav-link" to="/basketball">basketball</Link>
                         </li>
                     </ul>
                 </nav>
 
                 <Route path="/" exact component={Home} />
-                <Route path ="/news" exact component={News} />
-                <Route path="/sports" exact component={Sport} />
-                <Route path ="/article/:id" component={Single} />
+                <Route path ="/football" exact component={Football} />
+                <Route path="/basketball" exact component={Basketball} />
+                <Route path ="/game/:id" component={Single} />
                
             </div>
         </Router>

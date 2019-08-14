@@ -12,24 +12,6 @@ class Single extends Component {
     };
   } 
   
-deletecomment=(e)=>{
-console.log(e.target.id);
-axios.post(`http://localhost:3000/deletecomment`,{id:e.target.id})
-.then(res => {
-  const data = res.data;
-  console.log(data);
-}).then(axios.all([
-  axios.get("http://localhost:3000/article/" + this.props.match.params.id),
-  axios.get("http://localhost:3000/comments/" + this.props.match.params.id)
-]).then(res => {
-  const articledata = res[0].data;
-  const commentsdata = res[1].data;
-  console.log(this.props.match.params.id);
-  console.log(commentsdata);
-
-  this.setState({ article: articledata[0], comments: commentsdata });
-}));
-  }
 
   
   setcomment = (e) => {
@@ -52,7 +34,7 @@ axios.post(`http://localhost:3000/deletecomment`,{id:e.target.id})
         const data = res.data;
         console.log(data);
       }).then(axios.all([
-        axios.get("http://localhost:3000/article/" + this.props.match.params.id),
+        axios.get("http://localhost:3000/game/" + this.props.match.params.id),
         axios.get("http://localhost:3000/comments/" + this.props.match.params.id)
       ]).then(res => {
         const articledata = res[0].data;
@@ -66,7 +48,7 @@ axios.post(`http://localhost:3000/deletecomment`,{id:e.target.id})
   }
   componentDidMount() {
     axios.all([
-      axios.get("http://localhost:3000/article/" + this.props.match.params.id),
+      axios.get("http://localhost:3000/game/" + this.props.match.params.id),
       axios.get("http://localhost:3000/comments/" + this.props.match.params.id)
     ]).then(res => {
       const articledata = res[0].data;
@@ -90,12 +72,12 @@ axios.post(`http://localhost:3000/deletecomment`,{id:e.target.id})
             <br></br> <br></br>
             {this.state.comments.map(onenew => (
               <div key={onenew.id} style={{backgroundColor:"#1EC9E8",color:"white"}}>
-                <p>{"articleid:  " + onenew.article_id}</p>
-                <p>{"comment-title:  " + onenew.title}</p>
+                <p>{"name:  " + onenew.name}</p> 
                 <p>{"commentbody:  " + onenew.body}</p>
+                <p>{"gameid:  " + onenew.game_id}</p>
+                <p>{"commenid:  " + onenew.id}</p>
                 <p>{"comment-date:  " + onenew.date}</p>
-                <p>{"comment-id:  " + onenew.id}</p>
-                <button onClick={this.deletecomment} id={onenew.id}>delete</button>
+              
               </div>
             ))}
           </div>
@@ -128,7 +110,7 @@ axios.post(`http://localhost:3000/deletecomment`,{id:e.target.id})
     <input type="text" name="body" onChange={this.setcomment} />
                     </label>
                     <br></br>
-                    <input type="submit" value="Отправить" />
+                    <input type="submit" value="addcomment" />
                   </form>
                 </div>
 
