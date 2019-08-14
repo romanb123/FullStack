@@ -34,7 +34,7 @@ router.get('/game/:id', function (req, res, next) {
 
 
 router.post('/comments/:id', function (req, res, next) {
-  var comment = `INSERT INTO comments ( name, body, game_id) VALUES ('${req.body.title}', '${req.body.body}','${req.params.id}')`;
+  var comment = `INSERT INTO comments ( name, body, game_id) VALUES ('${req.body.name}', '${req.body.body}','${req.params.id}')`;
   sql.query(comment, function (err, result) {
     if (err) throw err;
     console.log(req.body);

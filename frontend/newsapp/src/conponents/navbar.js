@@ -29,8 +29,7 @@ function AppRouter() {
                 <Route path="/" exact component={Home} />
                 <Route path ="/football" exact component={Football} />
                 <Route path="/basketball" exact component={Basketball} />
-                <Route path ="/game/:id" component={Single} />
-               
+                <Route path ="/game/:id" component={Single} />     
             </div>
         </Router>
     );

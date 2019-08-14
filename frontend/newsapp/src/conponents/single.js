@@ -17,7 +17,7 @@ class Single extends Component {
   setcomment = (e) => {
     console.log(e.target.name);
     if(e.target.name==="title"){
-    this.setState({ title: e.target.value });
+    this.setState({ name: e.target.value });
     }
     else if(e.target.name==="body"){
       this.setState({ body: e.target.value });
@@ -29,7 +29,7 @@ class Single extends Component {
     console.log("title    "+this.state.title);
     console.log("body    "+this.state.body);
     
-    axios.post(`http://localhost:3000/comments/` + this.props.match.params.id,{title:this.state.title,body:this.state.body})
+    axios.post(`http://localhost:3000/comments/` + this.props.match.params.id,{name:this.state.name,body:this.state.body})
       .then(res => {
         const data = res.data;
         console.log(data);
@@ -65,10 +65,13 @@ class Single extends Component {
       <div style={{ textAlign: "center" }}>
         <div className="card" style={{ width: "40rem", margin: "auto", textAlign: "center",backgroundColor:"#51EAFF" }}>
           <div className="card-body">
-            <h5 className="card-title">{"category:  "+this.state.article.category}</h5>
-            <h5 className="card-title">{"title:  "+this.state.article.title}</h5>
-            <p className="card-text">{"body:  "+this.state.article.body}</p>
-            <p className="card-text">{"id:  "+this.state.article.id}</p>
+            <h5 className="card-title">{"id:  "+this.state.article.id}</h5>
+            <h5 className="card-title">{"team a:  "+this.state.article.teamA}</h5>
+            <h5 className="card-title">{"team b:  "+this.state.article.teamB}</h5>
+            <p className="card-text">{"score a:  "+this.state.article.scoreA}</p>
+            <p className="card-text">{"score b:  "+this.state.article.scoreB}</p>
+            <p className="card-text">{"time:  "+this.state.article.time}</p>
+            <p className="card-text">{"category:  "+this.state.article.Category}</p>
             <br></br> <br></br>
             {this.state.comments.map(onenew => (
               <div key={onenew.id} style={{backgroundColor:"#1EC9E8",color:"white"}}>
@@ -102,7 +105,7 @@ class Single extends Component {
                 <div className="modal-body">
                   <form onSubmit={this.sendcomment}>
                     <label>
-                      commentitle
+                      name
     <input type="text" name="title" onChange={this.setcomment} />
                     </label>
                     <label>
